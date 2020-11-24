@@ -60,7 +60,6 @@ public class ParkingDataBaseIT {
         assertNotEquals(null, ticketFromDB);
         assertNotEquals(1, parkingSpotDAO.getNextAvailableSlot(ticketFromDB.getParkingSpot().getParkingType()));
         
-        
     }
 
     @Test
