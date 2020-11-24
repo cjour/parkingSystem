@@ -67,8 +67,13 @@ public class ParkingDataBaseIT {
     public void testParkingLotExit(){
         testParkingACar();
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
-        //parkingService.processExitingVehicle();
+        parkingService.processExitingVehicle();
         //TODO: check that the fare generated and out time are populated correctly in the database
+        //I got a random error here...
+        Ticket ticket = ticketDAO.getTicket("ABCDEF");
+        
+        assertNotEquals(null, ticket.getPrice());
+        assertNotEquals(null, ticket.getOutTime());
     }
 
 }
