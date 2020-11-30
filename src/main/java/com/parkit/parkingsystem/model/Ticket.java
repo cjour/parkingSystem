@@ -9,6 +9,7 @@ public class Ticket {
     private double price;
     private Date inTime;
     private Date outTime;
+	public boolean isAReccuringUser;
 
     public int getId() {
         return id;
@@ -18,7 +19,15 @@ public class Ticket {
         this.id = id;
     }
 
-    public ParkingSpot getParkingSpot() {
+    public boolean isAReccuringUser() {
+		return isAReccuringUser;
+	}
+
+	public void setAReccuringUser(boolean isAReccuringUser) {
+		this.isAReccuringUser = isAReccuringUser;
+	}
+
+	public ParkingSpot getParkingSpot() {
         return parkingSpot;
     }
 

@@ -127,13 +127,14 @@ public class FareCalculatorServiceTest {
     @Test
     public void calculateFareCarWithADiscount() {
     	Date inTime = new Date();
-    	inTime.setTime(System.currentTimeMillis() - (  24 * 60 * 60 * 1000));
+    	inTime.setTime(System.currentTimeMillis() - ( 60 * 60 * 1000));
     	Date outTime = new Date();
-    	ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, true);
-    	
+    	ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, false);
+    	ticket.setAReccuringUser(true);
     	ticket.setInTime(inTime);
     	ticket.setOutTime(outTime);
     	ticket.setParkingSpot(parkingSpot);
+    	
     	fareCalculatorService.calculateFare(ticket);
     	assertEquals((Fare.DISCOUNT), ticket.getPrice());
     }
