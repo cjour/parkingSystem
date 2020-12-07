@@ -31,13 +31,16 @@ public class TicketDAO {
             ps.setDouble(3, ticket.getPrice());
             ps.setTimestamp(4, new Timestamp(ticket.getInTime().getTime()));
             ps.setTimestamp(5, (ticket.getOutTime() == null)?null: (new Timestamp(ticket.getOutTime().getTime())) );
-            return ps.execute();
+            Boolean result = ps.execute();
+            System.out.println(result);
+            return result;
         }catch (Exception ex){
             logger.error("Error fetching next available slot",ex);
         }finally {
             dataBaseConfig.closeConnection(con);
-            return false;
         }
+        return false;
+
     }
 
     public Ticket getTicket(String vehicleRegNumber) {

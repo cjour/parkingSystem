@@ -27,6 +27,34 @@ public class FareCalculatorServiceTest {
     private void setUpPerTest() {
         ticket = new Ticket();
     }
+    
+    @Test
+    public void calculateFareCarLessThan30Min() {
+    	Date inTime = new Date();
+        inTime.setTime( System.currentTimeMillis() - (  30 * 60 * 1000) );
+        Date outTime = new Date();
+        ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR,false);
+
+        ticket.setInTime(inTime);
+        ticket.setOutTime(outTime);
+        ticket.setParkingSpot(parkingSpot);
+        fareCalculatorService.calculateFare(ticket);
+        assertEquals(ticket.getPrice(), 0);
+    }
+    
+    @Test
+    public void calculateFareBikeLessThan30Min() {
+    	Date inTime = new Date();
+        inTime.setTime( System.currentTimeMillis() - (  30 * 60 * 1000) );
+        Date outTime = new Date();
+        ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.BIKE,false);
+
+        ticket.setInTime(inTime);
+        ticket.setOutTime(outTime);
+        ticket.setParkingSpot(parkingSpot);
+        fareCalculatorService.calculateFare(ticket);
+        assertEquals(ticket.getPrice(), 0);
+    }
 
     @Test
     public void calculateFareCar(){

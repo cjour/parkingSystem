@@ -1,5 +1,6 @@
 package com.parkit.parkingsystem.integration;
 
+import com.parkit.parkingsystem.constants.ParkingType;
 import com.parkit.parkingsystem.dao.ParkingSpotDAO;
 import com.parkit.parkingsystem.dao.TicketDAO;
 import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
@@ -15,7 +16,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -49,7 +54,7 @@ public class ParkingDataBaseIT {
     private static void tearDown(){
 
     }
-
+    
     @Test
     public void testParkingACar(){
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
@@ -58,10 +63,17 @@ public class ParkingDataBaseIT {
         Ticket ticketFromDB = ticketDAO.getTicket("ABCDEF");
         
         assertNotEquals(null, ticketFromDB);
+        assertEquals("ABCDEF", ticketFromDB.getVehicleRegNumber());
+        assertEquals(ParkingType.CAR, ticketFromDB.getParkingSpot().getParkingType());
+        assertNotNull(ticketFromDB.getInTime());
+        assertNull(ticketFromDB.getOutTime());
+        
         assertNotEquals(1, parkingSpotDAO.getNextAvailableSlot(ticketFromDB.getParkingSpot().getParkingType()));
         
     }
 
+    
+    //I definitely need to rework on this because it doesn't seem to be running well.
     @Test
     public void testParkingLotExit(){
     	testParkingACar();
