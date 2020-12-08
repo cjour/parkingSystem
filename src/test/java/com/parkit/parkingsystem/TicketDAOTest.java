@@ -64,8 +64,7 @@ public class TicketDAOTest {
 		ticket.setPrice(0);
 
 		TicketDAO ticketDAO = new TicketDAO();
-		Class<? extends Ticket> ticketReturned = ticketDAO.verifyIfUserIsRecurrent(vehicleReg).getClass();
-		assertEquals(Ticket.class, ticketReturned);
+		assertEquals(Ticket.class, ticketDAO.getOlderTicket(vehicleReg).getClass());
 	}
 
 }

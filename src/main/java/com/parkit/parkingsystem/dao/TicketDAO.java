@@ -72,7 +72,7 @@ public class TicketDAO {
 
     }
     
-    public Ticket verifyIfUserIsRecurrent(String vehicleRegNumber) {
+    public Ticket getOlderTicket(String vehicleRegNumber) {
         Connection con = null;
         Ticket ticket = null;
         try {

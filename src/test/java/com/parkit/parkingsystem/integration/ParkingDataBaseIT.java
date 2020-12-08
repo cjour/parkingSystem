@@ -23,6 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
+import java.util.concurrent.TimeUnit;
+
 @ExtendWith(MockitoExtension.class)
 public class ParkingDataBaseIT {
 
@@ -73,16 +75,13 @@ public class ParkingDataBaseIT {
     }
 
     
-    //I definitely need to rework on this because it doesn't seem to be running well.
     @Test
     public void testParkingLotExit(){
     	testParkingACar();
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         parkingService.processExitingVehicle();
         //TODO: check that the fare generated and out time are populated correctly in the database
-        //I got a random error here...
-        Ticket ticket = ticketDAO.getTicket("ABCDEF");
-        
+        Ticket ticket = ticketDAO.getOlderTicket("ABCDEF");
         assertNotEquals(null, ticket.getPrice());
         assertNotEquals(null, ticket.getOutTime());
     }
