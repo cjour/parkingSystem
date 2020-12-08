@@ -34,6 +34,7 @@ public class FareCalculatorService {
             default:
                 throw new IllegalArgumentException("Unkown Parking Type");
         }
+        
         if(ticket.isAReccuringUser == true) {
         	ticket.setPrice(ticket.getPrice()*Fare.DISCOUNT);
         }
