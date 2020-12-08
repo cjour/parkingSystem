@@ -52,6 +52,7 @@ public class ParkingServiceTest {
         }
     }
 
+       
     @Test
     public void processExitingVehicleTest(){
         parkingService.processExitingVehicle();

@@ -44,7 +44,7 @@ public class ParkingService {
                 ticket.setPrice(0);
                 ticket.setInTime(inTime);
                 ticket.setOutTime(null);
-                Ticket isAGoodCustomer = ticketDAO.getTicket(vehicleRegNumber);
+                Ticket isAGoodCustomer = ticketDAO.verifyIfUserIsRecurrent(vehicleRegNumber);
                 if(isAGoodCustomer != null) {
                     ticket.setAReccuringUser(true);
                 }
