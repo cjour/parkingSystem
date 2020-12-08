@@ -50,5 +50,22 @@ public class TicketDAOTest {
 		ticketReturned.setOutTime(new Date(System.currentTimeMillis()));
 		assertEquals(true, ticketDAO.updateTicket(ticketReturned));
 	}
+	
+	@Test
+	public void verifyMyEligibilityForADiscount() {
+		Ticket ticket = new Ticket();
+		// ticket properties.
+		ticket.setAReccuringUser(true);
+		Date inTime = new Date();
+		inTime.setTime(System.currentTimeMillis() - (60 * 60 * 1000));
+		ticket.setInTime(inTime);
+		ticket.setParkingSpot(new ParkingSpot(2, ParkingType.CAR, false));
+		ticket.setVehicleRegNumber(vehicleReg);
+		ticket.setPrice(0);
+
+		TicketDAO ticketDAO = new TicketDAO();
+		Class<? extends Ticket> ticketReturned = ticketDAO.verifyIfUserIsRecurrent(vehicleReg).getClass();
+		assertEquals(Ticket.class, ticketReturned);
+	}
 
 }

@@ -26,5 +26,6 @@ public class ParkingSpotDAOTest {
 		assertEquals(true, parkingSpotDAO.updateParking(parkingSpot));		
  
 	}
+	
 
 }
