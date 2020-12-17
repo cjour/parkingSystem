@@ -17,13 +17,11 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
-import java.util.concurrent.TimeUnit;
 
 @ExtendWith(MockitoExtension.class)
 public class ParkingDataBaseIT {
@@ -56,12 +54,12 @@ public class ParkingDataBaseIT {
     private static void tearDown(){
 
     }
-    
+
     @Test
     public void testParkingACar(){
         ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
         parkingService.processIncomingVehicle();
-        //TODO: check that a ticket is actualy saved in DB and Parking table is updated with availability
+        //TODO: check that a ticket is actually saved in DB and Parking table is updated with availability
         Ticket ticketFromDB = ticketDAO.getTicket("ABCDEF");
         
         assertNotEquals(null, ticketFromDB);
@@ -69,9 +67,7 @@ public class ParkingDataBaseIT {
         assertEquals(ParkingType.CAR, ticketFromDB.getParkingSpot().getParkingType());
         assertNotNull(ticketFromDB.getInTime());
         assertNull(ticketFromDB.getOutTime());
-        
-        assertNotEquals(1, parkingSpotDAO.getNextAvailableSlot(ticketFromDB.getParkingSpot().getParkingType()));
-        
+        assertNotEquals(1, parkingSpotDAO.getNextAvailableSlot(ticketFromDB.getParkingSpot().getParkingType()));    
     }
 
     
