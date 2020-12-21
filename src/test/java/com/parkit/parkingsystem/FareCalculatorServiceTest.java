@@ -246,14 +246,16 @@ public class FareCalculatorServiceTest {
     }
     
     @Test
-    public void calculateFareNullOutTime() {
+    public void calculateFareNullParkingType() {
     	Date inTime = new Date();
-        inTime.setTime( System.currentTimeMillis() - (  15 * 60 * 1000) );
+        inTime.setTime( System.currentTimeMillis() - (  60 * 60 * 1000) );
+        Date outTime = new Date();
         ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, false);
 
         ticket.setInTime(inTime);
-        ticket.setOutTime(null);
+        ticket.setOutTime(outTime);
         ticket.setParkingSpot(parkingSpot);
+        ticket.getParkingSpot().setParkingType(ParkingType.NULL);
     	ticket.setAReccuringUser(true);
         assertThrows(IllegalArgumentException.class, ()->{
         	fareCalculatorService.calculateFare(ticket);
